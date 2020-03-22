@@ -11,6 +11,8 @@
         android:id="@+id/listTextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
         android:gravity="center"
         android:textSize="40dp"
         tool:text="200"
