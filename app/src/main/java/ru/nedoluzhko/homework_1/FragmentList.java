@@ -20,6 +20,8 @@ public class FragmentList extends Fragment {
 
     List<MyData> listData;
 
+    private static String  NUM_COUNT_KEY = "numCountKey";
+
     private OnItemSelectedListener listener;
     private MyDataAdapter myDataAdapter;
 
@@ -30,7 +32,7 @@ public class FragmentList extends Fragment {
     public static FragmentList newInstance(int numCount){
         FragmentList fragmentList = new FragmentList();
         Bundle args = new Bundle();
-        args.putInt("numCount", numCount);
+        args.putInt(NUM_COUNT_KEY, numCount);
         fragmentList.setArguments(args);
         return fragmentList;
     }
@@ -52,9 +54,9 @@ public class FragmentList extends Fragment {
 
         int numCount;
         if (savedInstanceState != null){
-            numCount = savedInstanceState.getInt("numCount");
+            numCount = savedInstanceState.getInt(NUM_COUNT_KEY);
         } else {
-            numCount = getArguments().getInt("numCount");
+            numCount = getArguments().getInt(NUM_COUNT_KEY);
         }
 
         listData = new ArrayList<>();
@@ -93,7 +95,7 @@ public class FragmentList extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("numCount", listData.size());
+        outState.putInt(NUM_COUNT_KEY, listData.size());
     }
 
     public static class MyData {

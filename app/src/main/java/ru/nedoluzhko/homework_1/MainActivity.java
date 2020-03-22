@@ -10,6 +10,7 @@ public class MainActivity extends AppCompatActivity implements FragmentList.OnIt
     static int START_LIST_LEN = 100;
 
     private boolean isFirstStart = true;
+    private static String IS_FIRST_START_KEY = "isFirstStartKey";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements FragmentList.OnIt
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState != null) {
-            isFirstStart = savedInstanceState.getBoolean("isFirstStart");
+            isFirstStart = savedInstanceState.getBoolean(IS_FIRST_START_KEY);
         }
 
         if (isFirstStart == true){
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements FragmentList.OnIt
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         isFirstStart = false;
-        outState.putBoolean("isFirstStart", isFirstStart);
+        outState.putBoolean(IS_FIRST_START_KEY, isFirstStart);
     }
 
 
