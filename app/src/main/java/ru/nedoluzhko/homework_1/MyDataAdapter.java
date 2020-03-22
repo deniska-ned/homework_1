@@ -1,7 +1,6 @@
 package ru.nedoluzhko.homework_1;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

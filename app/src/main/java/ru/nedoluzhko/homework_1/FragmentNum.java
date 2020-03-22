@@ -26,8 +26,13 @@ public class FragmentNum extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        data = new FragmentList.MyData(getArguments().getInt("numItem"));
+        if (savedInstanceState != null) {
+            String string = savedInstanceState.getString("numItem");
+            int numItem = Integer.valueOf(string);
+            data = new FragmentList.MyData(numItem);
+        } else {
+            data = new FragmentList.MyData(getArguments().getInt("numItem"));
+        }
     }
 
     @Nullable
@@ -47,7 +52,9 @@ public class FragmentNum extends Fragment {
         textView.setTextColor(ContextCompat.getColor(getContext(), data.color));
     }
 
-    public int getNum(){
-        return Integer.valueOf(data.text);
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("numItem", data.text);
     }
 }
