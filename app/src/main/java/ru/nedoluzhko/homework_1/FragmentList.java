@@ -24,7 +24,7 @@ public class FragmentList extends Fragment {
     private MyDataAdapter myDataAdapter;
 
     public interface OnItemSelectedListener {
-        public void onItemClick(int numItem);
+        void onItemClick(int numItem);
     }
 
     public static FragmentList newInstance(int numCount){
@@ -42,7 +42,7 @@ public class FragmentList extends Fragment {
             listener = (OnItemSelectedListener) context;
         } else {
             throw new ClassCastException(context.toString()
-                    + " must implement MyListFragment.OnItemSelectedListener");
+                    + " must implement FragmentList.OnItemSelectedListener");
         }
     }
 
@@ -50,7 +50,12 @@ public class FragmentList extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int numCount = getArguments().getInt("numCount");
+        int numCount;
+        if (savedInstanceState != null){
+            numCount = savedInstanceState.getInt("numCount");
+        } else {
+            numCount = getArguments().getInt("numCount");
+        }
 
         listData = new ArrayList<>();
         for (int i = 1; i <= numCount; ++i)
@@ -85,8 +90,10 @@ public class FragmentList extends Fragment {
         });
     }
 
-    public int getListLen(){
-        return myDataAdapter.getItemCount();
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("numCount", listData.size());
     }
 
     public static class MyData {
